@@ -7,3 +7,17 @@
 // (R0, R1, R2 refer to RAM[0], RAM[1], and RAM[2], respectively.)
 
 // Put your code here.
+@1
+D=M
+@END
+D;JGT
+(WHILE)
+    @1
+    D=-M
+    M=D
+    @WHILE
+    D;JLT
+(END)
+    @END
+    D;JGT
+
