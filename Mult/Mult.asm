@@ -7,47 +7,50 @@
 // (R0, R1, R2 refer to RAM[0], RAM[1], and RAM[2], respectively.)
 
 // Put your code here.
+@R0
+M=0
+
+// Initialize NEG_FLAG to 0
+@NEG_FLAG
+M=0
+
+// Check if R1 is negative
 @R1
 D=M
-@NEG
-D;JLT
+@PROCESS_R1
+D;JGE
 
-@LOOP
-0;JMP
+@R1
+M=-M
+@NEG_FLAG
+M=1
 
+(PROCESS_R1)
 (LOOP)
     @R1
-    MD=M-1
-
+    D=M
     @END
-    D;JLT
+    D;JEQ  // Jump to END if R1 == 0
 
     @R2
     D=M
     @R0
-    M=M+D
-    @LOOP
-    0;JMP  
+    M=M+D 
 
-(NEG)
     @R1
-    M=-M
-
-    @8
-    M=1
+    M=M-1  
 
     @LOOP
-    0;JMP  
+    0;JMP
+
 (END)
-    @8
+    @NEG_FLAG
     D=M
     @FINAL
-    D;JEQ
-
+    D;JEQ  
     @R0
     M=-M
 
 (FINAL)
-    @END
+    @FINAL
     0;JMP
-
