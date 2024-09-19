@@ -8,46 +8,48 @@
 
 // Put your code here.
 
+// Multiplies R1 and R2 and stores the result in R0.
+// (R0, R1, R2 refer to RAM[0], RAM[1], and RAM[2], respectively.)
+
 @R0
 M=0
-@8
+
+@NEG_FLAG
 M=0
 
 @R1
 D=M
-@NEG
-D;JLT
+@R1_POS
+D;JGE
 
+@R1
+M=-M
+@NEG_FLAG
+M=1
+
+(R1_POS)
 (LOOP)
     @R1
-    MD=M-1
+    D=M
     @END
-    D;JEQ 
+    D;JEQ  
 
     @R2
     D=M
     @R0
-    M=M+D   
+    M=M+D  
 
-    @LOOP
-    0;JMP
-
-(NEG)
     @R1
-    M=-M
-
-    @8
-    M=1
+    M=M-1  
 
     @LOOP
     0;JMP
 
 (END)
-    @8
+    @NEG_FLAG
     D=M
     @FINAL
     D;JEQ  
-
     @R0
     M=-M
 
