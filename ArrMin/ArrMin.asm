@@ -28,16 +28,9 @@ M=M-1
 
     @smallest
     D=D-M //if current<smallest
-    @UPDATE
-    D;JLT
+    @SKIP_UPDATE
+    D;JGE
 
-    @R2
-    M=M-1
-    @LOOP
-    0;JMP
-
-
-(UPDATE)
     @R1
     D=M
     @R2
@@ -45,6 +38,14 @@ M=M-1
     D=M
     @smallest
     M=D
+
+
+
+(SKIP_UPDATE)
+    @R2
+    M=M-1
+    @LOOP
+    0;JMP
 
 (END)
     @smallest
